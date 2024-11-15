@@ -47,7 +47,7 @@ def tan(number):
 
 @cmd_group.command()
 @click.argument("epsilon", type=float)
-def biggest_angle(epsilon):
+def approx(epsilon):
     """Gives biggest angle for chosen EPSILON with |x-sin(x)| <= EPSILON.
 
     For chosen EPSILON value check the biggest angle for which

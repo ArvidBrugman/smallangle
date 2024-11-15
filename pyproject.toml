@@ -19,4 +19,3 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 smallangle = "smallangle.smallangle:cmd_group"
-approx = "smallangle.smallangle:cmd_group"
