@@ -2,7 +2,7 @@ import click
 import numpy as np
 from numpy import pi
 import pandas as pd
-
+import math as mt
 
 @click.group()
 def cmd_group():
@@ -17,9 +17,9 @@ def cmd_group():
     show_default=True,  # show default in help
 )
 def sin(number):
-    """ Generates list with NUMBER and sin(NUMBER)
+    """ Generates list with NUMBER and sin(NUMBER).
     
-    Generates a list of numbers between 0 en 2pi, with the sin of these numbers
+    Generates a list of NUMBER(S) between 0 en 2pi, with the sin of these NUMBER(S).
     """
     for _ in range(number):
         x = np.linspace(0, 2 * pi, number)
@@ -35,9 +35,9 @@ def sin(number):
     show_default=True,  # show default in help
 )
 def tan(number):
-    """ Generates list with NUMBER and tan(NUMBER)
+    """ Generates list with NUMBER and tan(NUMBER).
 
-    Generates a list of numbers between 0 en 2pi, with the tan of these numbers
+    Generates a list of NUMBER(S) between 0 en 2pi, with the tan of these NUMBER(S).
     """
     for _ in range(number):
         x = np.linspace(0, 2 * pi, number)
@@ -45,5 +45,21 @@ def tan(number):
         print(df)
 
 
+@cmd_group.command()
+@click.argument("epsilon", type=float)
+def biggest_angle(epsilon):
+    """Gives biggest angle for chosen EPSILON with |x-sin(x)| <= EPSILON.
+
+    For chosen EPSILON value check the biggest angle for which
+    |x-sin(x)| <= EPSILON, rounded by 3 decimals.  
+    """
+    x = 0
+    step = 0.001
+    while abs(x - mt.sin(x)) <= epsilon:
+        x = x + step
+    result = round(x - step, 3)
+    print(f"For an accuracy of {epsilon}, the small-angle approximation holds up to x = {result}.")
+
 if __name__ == "__main__":
     cmd_group()
+
